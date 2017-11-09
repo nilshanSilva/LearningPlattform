@@ -42,7 +42,7 @@ namespace LearningPlattform.Controllers
         {
             // var ViewModel = new VideoCourseViewModel(){ Course = Course };
             Video vid = new Video { Course = Course };
-            return View(vid);//
+            return View(vid);
         }
 
         // POST: Videos/Create
