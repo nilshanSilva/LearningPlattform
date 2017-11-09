@@ -38,6 +38,7 @@ namespace LearningPlattform.Controllers
         }
 
         // GET: Videos/Create
+        [Authorize(Roles = "Instructor")]
         public ActionResult Create(Course Course)
         {
             // var ViewModel = new VideoCourseViewModel(){ Course = Course };
