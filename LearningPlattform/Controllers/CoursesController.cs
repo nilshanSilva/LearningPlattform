@@ -12,7 +12,7 @@ namespace LearningPlattform.Controllers
 {
     public class CoursesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext(); // This is Test Comment
 
         // GET: Courses
         public ActionResult Index()
