@@ -56,8 +56,8 @@ namespace LearningPlattform.Controllers
             {
                 db.Videos.Add(video);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Course", video.Course.Id);
-               
+                // return RedirectToAction("Details", "Course", video.Course.Id);
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");
