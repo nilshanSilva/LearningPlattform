@@ -28,6 +28,10 @@ namespace LearningPlattform.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
+            var vid = db.Videos.Where(c => c.Course.Id == id).ToList();
+            IQueryable Videoss = from p in db.Videos where p.Course == course select p;
+
+            
             if (course == null)
             {
                 return HttpNotFound();
