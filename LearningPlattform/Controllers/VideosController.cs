@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using LearningPlattform.Models;
 using LearningPlattform.Models.ViewModels;
 using System.Data.Entity.Validation;
+using System;
 
 namespace LearningPlattform.Controllers
 {
@@ -51,11 +52,22 @@ namespace LearningPlattform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Path")] Video video, int CourseId)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Path")] Video video, int CourseId, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                video.Course.Id = CourseId;
+                Course course = db.Courses.Find(CourseId);
+                video.Course = course;
+
+                if(file.ContentLength > 0)
+                {
+                    var fileName = System.IO.Path.GetFileName(file.FileName);
+                    var guid = Guid.NewGuid().ToString();
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads"), guid + fileName);
+                    file.SaveAs(path);
+                    video.Path = path;
+                }
+
                 db.Videos.Add(video);
                 db.SaveChanges();
                 // return RedirectToAction("Details", "Course", video.Course.Id);

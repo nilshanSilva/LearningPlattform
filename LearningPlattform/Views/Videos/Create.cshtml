@@ -30,7 +30,10 @@
                 @Html.ValidationMessageFor(model => model.Video.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @* 
+        Hidden Form Field for Passing the CourseId    
+        *@
+        <input type="hidden" name="HiddenText" id="HiddenText" value="@Model.Course.Id" />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
