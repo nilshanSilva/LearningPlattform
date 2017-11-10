@@ -9,7 +9,7 @@ namespace LearningPlattform.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(LearningPlattform.Models.ApplicationDbContext context)
