@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LearningPlattform.Models;
+using LearningPlattform.Models.ViewModels;
 
 namespace LearningPlattform.Controllers
 {
@@ -28,11 +29,13 @@ namespace LearningPlattform.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
+            List<Video> videos = db.Videos.Where(d => d.Course.Id == id).ToList();
+            VideoCourseViewModel VCVM = new VideoCourseViewModel() { Videos = videos, Course = course };
             if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(VCVM);
         }
 
         // GET: Courses/Create

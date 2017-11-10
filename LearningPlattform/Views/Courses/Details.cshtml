@@ -1,4 +1,4 @@
-﻿@model LearningPlattform.Models.Course
+﻿@model LearningPlattform.Models.ViewModels.VideoCourseViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,58 +11,65 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Course.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Course.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Course.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Course.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.Course.Category)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category)
+            @Html.DisplayFor(model => model.Course.Category)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Language)
+            @Html.DisplayNameFor(model => model.Course.Language)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Language)
+            @Html.DisplayFor(model => model.Course.Language)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CourseLevel)
+            @Html.DisplayNameFor(model => model.Course.CourseLevel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourseLevel)
+            @Html.DisplayFor(model => model.Course.CourseLevel)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Course.Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Course.Price)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Course.Id }) |
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-    @Html.ActionLink("Add Video", "Create", "Videos", new { Model}, null)
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Course.Id }) |
+    @Html.ActionLink("Add Video", "Create", "Videos", new {CourseId = Model.Course.Id}, null)
+    @*@Html.ActionLink("Add Video", "Create", "Videos", new { Model }, null)*@
 </p>
+<ul>
+@foreach(var item in Model.Videos)
+{
+<li>@item.Name</li>
+}
+</ul>

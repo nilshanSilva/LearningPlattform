@@ -5,15 +5,15 @@ using System.Web;
 
 namespace LearningPlattform.Models.ViewModels
 {
-    public class VideoCourseViewModel
+    public class SingleVideoCourseVM
     {
-        public VideoCourseViewModel()
+        public SingleVideoCourseVM()
         {
-            Videos = new List<Video>();
+            Video = new Video();
             Course = new Course();
         }
-        
-        public List<Video> Videos { get; set; }
+
+        public Video Video { get; set; }
         public Course Course { get; set; }
     }
 }

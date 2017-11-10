@@ -39,11 +39,11 @@ namespace LearningPlattform.Controllers
 
         // GET: Videos/Create
         [Authorize(Roles = "Instructor")]
-        public ActionResult Create(Course Course)
+        public ActionResult Create(int CourseId)
         {
-            // var ViewModel = new VideoCourseViewModel(){ Course = Course };
-            Video vid = new Video { Course = Course };
-            return View(vid);
+            Course course = db.Courses.Find(CourseId);
+            SingleVideoCourseVM VCVM = new SingleVideoCourseVM() { Course = course };
+            return View(VCVM);
         }
 
         // POST: Videos/Create
@@ -51,10 +51,11 @@ namespace LearningPlattform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Path")] Video video)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Path")] Video video, int CourseId)
         {
             if (ModelState.IsValid)
             {
+                video.Course.Id = CourseId;
                 db.Videos.Add(video);
                 db.SaveChanges();
                 // return RedirectToAction("Details", "Course", video.Course.Id);
