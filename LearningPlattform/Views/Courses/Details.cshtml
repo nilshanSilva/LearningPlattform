@@ -4,6 +4,40 @@
     ViewBag.Title = "Details";
 }
 
+<style>
+    .pb-video-container {
+        padding-top: 20px;
+        background: #bdc3c7;
+        font-family: Lato;
+    }
+
+    .pb-video {
+        border: 1px solid #e6e6e6;
+        padding: 5px;
+    }
+
+        .pb-video:hover {
+            background: #2c3e50;
+        }
+
+    .pb-video-frame {
+        transition: width 2s, height 2s;
+    }
+
+        .pb-video-frame:hover {
+            height: 300px;
+        }
+
+    .pb-row {
+        margin-bottom: 10px;
+    }
+
+    .menu-link {
+        height: 50px;
+    }
+</style>
+
+
 <h2>Details</h2>
 
 <div>
@@ -67,9 +101,30 @@
     @Html.ActionLink("Add Video", "Create", "Videos", new {CourseId = Model.Course.Id}, null)
     @*@Html.ActionLink("Add Video", "Create", "Videos", new { Model }, null)*@
 </p>
-<ul>
-@foreach(var item in Model.Videos)
+
+@foreach (var item in Model.Videos)
 {
-<li>@item.Name</li>
+    <div class="row">
+        <div class="container-fluid pb-video-container">
+            <div class="col-md-4">
+                <div class="row pb-row">
+                    <div class="col-md-12 pb-video">
+                        <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                        <label class="form-control label-warning text-xs-center">Claydee - Alena</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2>@item.Name</h2>
+            <p>
+                @item.Description
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+
+    </div>
+
+
 }
 </ul>
