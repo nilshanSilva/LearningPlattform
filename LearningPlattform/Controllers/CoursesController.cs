@@ -62,7 +62,7 @@ namespace LearningPlattform.Controllers
                     var guid = Guid.NewGuid().ToString();
                     var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Images"), guid + fileName);
                     file.SaveAs(path);
-                  //  course.ImagePath = path;
+                    course.ImagePath = path;
                 }
 
                 db.Courses.Add(course);

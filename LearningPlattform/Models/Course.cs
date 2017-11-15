@@ -26,8 +26,8 @@ namespace LearningPlattform.Models
         public CourseLevel CourseLevel { get; set; }
         [DataType(DataType.Currency), Range(0,300)]
         public Decimal Price { get; set; }
-       // [ScaffoldColumn(false)]
-      //  public string ImagePath { get; set; }
+        [ScaffoldColumn(false)]
+        public string ImagePath { get; set; }
         [ScaffoldColumn(false)]
         public ICollection<Video> Videos { get; set; }
         [ScaffoldColumn(false)]

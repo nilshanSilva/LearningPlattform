@@ -209,6 +209,14 @@
     <Compile Include="Migrations\201711081705315_enrollments.Designer.cs">
       <DependentUpon>201711081705315_enrollments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711151831374_dropcolumnPath.cs" />
+    <Compile Include="Migrations\201711151831374_dropcolumnPath.Designer.cs">
+      <DependentUpon>201711151831374_dropcolumnPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711151839125_reAddColumnPath.cs" />
+    <Compile Include="Migrations\201711151839125_reAddColumnPath.Designer.cs">
+      <DependentUpon>201711151839125_reAddColumnPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -316,6 +324,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081705315_enrollments.resx">
       <DependentUpon>201711081705315_enrollments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151831374_dropcolumnPath.resx">
+      <DependentUpon>201711151831374_dropcolumnPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151839125_reAddColumnPath.resx">
+      <DependentUpon>201711151839125_reAddColumnPath.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
