@@ -50,10 +50,21 @@ namespace LearningPlattform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, Authorize(Roles = "Instructor")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price")] Course course)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price")] Course course, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                var fileName = System.IO.Path.GetFileName(file.FileName);
+                //string fileType = fileName.Substring(fileName.LastIndexOf("."));
+
+                if (file != null && file.ContentLength > 0 /*&& fileType == ".mp4"*/)
+                {
+                    var guid = Guid.NewGuid().ToString();
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Images"), guid + fileName);
+                    file.SaveAs(path);
+                    course.ImagePath = path;
+                }
+
                 db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");

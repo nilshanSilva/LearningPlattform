@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201711081705315_enrollments.Designer.cs">
       <DependentUpon>201711081705315_enrollments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711150559056_AddCourseImage.cs" />
+    <Compile Include="Migrations\201711150559056_AddCourseImage.Designer.cs">
+      <DependentUpon>201711150559056_AddCourseImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -290,7 +294,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\Documents\" />
+    <Folder Include="Uploads\Images\" />
+    <Folder Include="Uploads\Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -314,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081705315_enrollments.resx">
       <DependentUpon>201711081705315_enrollments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711150559056_AddCourseImage.resx">
+      <DependentUpon>201711150559056_AddCourseImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

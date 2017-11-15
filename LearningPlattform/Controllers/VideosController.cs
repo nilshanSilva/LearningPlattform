@@ -67,7 +67,7 @@ namespace LearningPlattform.Controllers
                 {
 
                     var guid = Guid.NewGuid().ToString();
-                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads"), guid + fileName);
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Videos"), guid + fileName);
                     file.SaveAs(path);
                     video.Path = path;
                 }
