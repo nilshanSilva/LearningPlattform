@@ -7,18 +7,18 @@ namespace LearningPlattform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddCourseImage : IMigrationMetadata
+    public sealed partial class dropcolumnPath : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCourseImage));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(dropcolumnPath));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711150559056_AddCourseImage"; }
+            get { return "201711151831374_dropcolumnPath"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target
