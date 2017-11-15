@@ -213,9 +213,9 @@
     <Compile Include="Migrations\201711150559056_AddCourseImage.Designer.cs">
       <DependentUpon>201711150559056_AddCourseImage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711151709268_AddCourseImage1.cs" />
-    <Compile Include="Migrations\201711151709268_AddCourseImage1.Designer.cs">
-      <DependentUpon>201711151709268_AddCourseImage1.cs</DependentUpon>
+    <Compile Include="Migrations\201711151808125_AddCourseImage1.cs" />
+    <Compile Include="Migrations\201711151808125_AddCourseImage1.Designer.cs">
+      <DependentUpon>201711151808125_AddCourseImage1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -328,8 +328,8 @@
     <EmbeddedResource Include="Migrations\201711150559056_AddCourseImage.resx">
       <DependentUpon>201711150559056_AddCourseImage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711151709268_AddCourseImage1.resx">
-      <DependentUpon>201711151709268_AddCourseImage1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711151808125_AddCourseImage1.resx">
+      <DependentUpon>201711151808125_AddCourseImage1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

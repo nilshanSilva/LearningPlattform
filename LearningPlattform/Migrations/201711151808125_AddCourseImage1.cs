@@ -7,12 +7,12 @@ namespace LearningPlattform.Migrations
     {
         public override void Up()
         {
-            AlterColumn("dbo.Courses", "ImagePath", c => c.String());
+            AddColumn("dbo.Courses", "ImagePath", c => c.String());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.Courses", "ImagePath", c => c.String(nullable: false));
+            DropColumn("dbo.Courses", "ImagePath");
         }
     }
 }

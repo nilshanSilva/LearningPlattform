@@ -13,7 +13,7 @@ namespace LearningPlattform.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711151709268_AddCourseImage1"; }
+            get { return "201711151808125_AddCourseImage1"; }
         }
         
         string IMigrationMetadata.Source
