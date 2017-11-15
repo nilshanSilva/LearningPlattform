@@ -7,13 +7,13 @@ namespace LearningPlattform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class reAddColumnPath : IMigrationMetadata
+    public sealed partial class addcolumn : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(reAddColumnPath));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addcolumn));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711151839125_reAddColumnPath"; }
+            get { return "201711151851503_addcolumn"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ namespace LearningPlattform.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class reAddColumnPath : DbMigration
+    public partial class addcolumn : DbMigration
     {
         public override void Up()
         {
