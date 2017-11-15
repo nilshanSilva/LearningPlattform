@@ -65,10 +65,9 @@ namespace LearningPlattform.Controllers
 
                 if (file != null && file.ContentLength > 0 /*&& fileType == ".mp4"*/)
                 {
-
                     var guid = Guid.NewGuid().ToString();
-                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Videos"), guid + fileName);
-                    string dbpath = "../../Uploads/Videos/" + guid.ToString() + fileName;
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Videos"), guid);
+                    string dbpath = "../../Uploads/Videos/" + guid.ToString();
                     file.SaveAs(path);
                     video.Path = dbpath;
                 }
