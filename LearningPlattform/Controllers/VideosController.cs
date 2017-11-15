@@ -50,28 +50,34 @@ namespace LearningPlattform.Controllers
         // POST: Videos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        ///[HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Path,Course")] Video video, int CourseId/*, HttpPostedFileBase file*/)
-        {
+        public ActionResult Create(int CourseId, [Bind(Include = "Id,Name,Description,Path")] Video video, HttpPostedFileBase file)
+         {
             if (ModelState.IsValid)
             {
                 Course course = db.Courses.Find(CourseId);
                 video.Course = course;
 
-                //if (file.ContentLength > 0)
-                //{
-                //    var fileName = System.IO.Path.GetFileName(file.FileName);
-                //    var guid = Guid.NewGuid().ToString();
-                //    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads"), guid + fileName);
-                //    file.SaveAs(path);
-                //    video.Path = path;
-                //}
+                var fileName = System.IO.Path.GetFileName(file.FileName);
+                //string fileType = fileName.Substring(fileName.LastIndexOf("."));
+
+                if (file != null && file.ContentLength > 0 /*&& fileType == ".mp4"*/)
+                {
+
+                    var guid = Guid.NewGuid().ToString();
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads"), guid + fileName);
+                    file.SaveAs(path);
+                    video.Path = path;
+                }
 
                 db.Videos.Add(video);
                 db.SaveChanges();
-                // return RedirectToAction("Details", "Course", video.Course.Id);
-                return RedirectToAction("Index");
+                 return RedirectToAction("Details", "Courses", new { Id = video.Course.Id });
+              //  return View("Details", "Course")
+               // return RedirectToAction("Index");
+               //developer.paypal.com
             }
 
             return RedirectToAction("Index");
