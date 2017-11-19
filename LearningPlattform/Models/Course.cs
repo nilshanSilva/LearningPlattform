@@ -36,6 +36,8 @@ namespace LearningPlattform.Models
         public ICollection<CourseComment> CourseComments { get; set; }
         [ScaffoldColumn(false)]
         public ICollection<ApplicationUser> Users { get; set; }
+       // [ScaffoldColumn(false), Required]
+       // public ApplicationUser Instructor { get; set; }
 
     }
 }

@@ -8,12 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using LearningPlattform.Models;
 using LearningPlattform.Models.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LearningPlattform.Controllers
 {
+    [Authorize]
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext(); // This is Test Comment
+        protected UserManager<ApplicationUser> UserManager { get; set; }
+
+        public CoursesController()
+        {
+            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db)); //for accessing current user
+        }
 
         // GET: Courses
         public ActionResult Index()
@@ -55,17 +64,19 @@ namespace LearningPlattform.Controllers
             if (ModelState.IsValid)
             {
                 var fileName = System.IO.Path.GetFileName(file.FileName);
-                //string fileType = fileName.Substring(fileName.LastIndexOf("."));
+                string fileType = fileName.Substring(fileName.LastIndexOf("."));
 
-                if (file != null && file.ContentLength > 0 /*&& fileType == ".mp4"*/)
+                if (file != null && file.ContentLength > 0 && (fileType == ".jpg" ||
+                                         fileType == ".jpeg" || fileType == ".png"))
                 {
-                    var guid = Guid.NewGuid().ToString();
-                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Images"), guid + fileName);
-                    string dbpath = "../Uploads/Images/" + guid.ToString() + fileName; 
+                    var Name = Guid.NewGuid().ToString() + fileType;
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Images"), Name);
+                    string dbpath = "../Uploads/Images/" + Name.ToString();
                     file.SaveAs(path);
                     course.ImagePath = dbpath;
                 }
-
+               // var user = UserManager.FindById(User.Identity.GetUserId());
+               // course.Instructor = user;
                 db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,11 +107,24 @@ namespace LearningPlattform.Controllers
         [HttpPost]
         [Authorize(Roles = "Instructor")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price")] Course course)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price")] Course course, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(course).State = EntityState.Modified;
+                var fileName = System.IO.Path.GetFileName(file.FileName);
+                string fileType = fileName.Substring(fileName.LastIndexOf("."));
+
+                if (file != null && file.ContentLength > 0 && (fileType == ".jpg" ||
+                                         fileType == ".jpeg" || fileType == ".png"))
+                {
+                    var Name = Guid.NewGuid().ToString() + fileType;
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Images"), Name);
+                    string dbpath = "../Uploads/Images/" + Name.ToString();
+                    file.SaveAs(path);
+                    course.ImagePath = dbpath;
+                }
+
+                    db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

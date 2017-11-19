@@ -16,15 +16,15 @@ namespace LearningPlattform
     }
     //This class is used to configure connection resiliency for azure database servers
     //Only supports in Entity Framework 6 and above
-    public class MyConfiguration : DbConfiguration
-    {
-        public MyConfiguration()
-        {
-            SetExecutionStrategy(
-                "System.Data.SqlClient",
-                () => new SqlAzureExecutionStrategy(1, TimeSpan.FromSeconds(30)));
-            //First parameter = number of retries
-            //Second parameter = number of seconds to start retry
-        }
-    }
+    //public class MyConfiguration : DbConfiguration
+    //{
+    //    public MyConfiguration()
+    //    {
+    //        SetExecutionStrategy(
+    //            "System.Data.SqlClient",
+    //            () => new SqlAzureExecutionStrategy(1, TimeSpan.FromSeconds(30)));
+    //        //First parameter = number of retries
+    //        //Second parameter = number of seconds to start retry
+    //    }
+    //}
 }

@@ -61,13 +61,14 @@ namespace LearningPlattform.Controllers
                 video.Course = course;
 
                 var fileName = System.IO.Path.GetFileName(file.FileName);
-                //string fileType = fileName.Substring(fileName.LastIndexOf("."));
+                string fileType = fileName.Substring(fileName.LastIndexOf("."));
 
-                if (file != null && file.ContentLength > 0 /*&& fileType == ".mp4"*/)
+                if (file != null && file.ContentLength > 0 && (fileType == ".mp4" ||
+                                          fileType == ".flv" || fileType == ".mov"))
                 {
-                    var guid = Guid.NewGuid().ToString();
-                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Videos"), guid);
-                    string dbpath = "../../Uploads/Videos/" + guid.ToString();
+                    var Name = Guid.NewGuid().ToString() + fileType;
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Uploads/Videos/"), Name);
+                    string dbpath = "../../Uploads/Videos/" + Name.ToString();
                     file.SaveAs(path);
                     video.Path = dbpath;
                 }
