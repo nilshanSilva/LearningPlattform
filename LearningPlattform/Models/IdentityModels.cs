@@ -56,5 +56,19 @@ namespace LearningPlattform.Models
         {
             return new ApplicationDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>().HasMany(c => c.Users).WithMany(u => u.Courses)
+
+                  .Map(cu =>
+                  {
+                      cu.MapLeftKey("CourseId");
+                      cu.MapRightKey("Id");
+                      cu.ToTable("Enrollments");
+                  });
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

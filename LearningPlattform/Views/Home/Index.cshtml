@@ -4,7 +4,7 @@
 <style>
         .pb-video-container {
                 padding-top: 20px;
-                background: #bdc3c7;
+                background: #6fb0dc;
                 font-family: Lato;
 
     }
@@ -40,28 +40,18 @@
 
     }
 
-    .test {
-        color: aqua;
+    .label-video {
         background: #ff0000;
     }
 </style>
 
+@Styles.Render("~/Content/css")
 
 
-<div width ="100%">
-    <div align="left" width ="40%" class="test" >
-        <p>ddd</p>
-        <img src="~/Content/1437047155.jpg">
-    </div>
-    <div align="right" width="40%" valign ="top"><img src="~/Content/1437047155.jpg" width="400"/></div>    
-</div>
+    <div align="left" height ="200" > <img src="~/Content/Images/New/99de1cad-c119-49e5-b695-fcbefb9a70ee-original.png" width="100%" /> </div>   
 
-<div><p></p></div>
+    <div align ="right"><img src="~/Content/Images/1437047155.jpg" width="40%" /></div>
 
-<div>
-    <div align ="left"><img src="~/Content/standard-repayment-plan-640x300.png" /></div>
-    <div align ="right"><img src="~/Content/1437047155.jpg"</div>
-</div>
 
 
 <div class="container-fluid pb-video-container">
@@ -135,3 +125,6 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

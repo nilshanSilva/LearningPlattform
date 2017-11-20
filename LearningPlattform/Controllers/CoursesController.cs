@@ -37,6 +37,8 @@ namespace LearningPlattform.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // var course = from t in db.Courses.Include(d => d.Users) where t.Id == id select t;
+            //Course course = db.Courses.Include(d => d.Users).Where(c => c.Id == id).Single();
             Course course = db.Courses.Find(id);
             List<Video> videos = db.Videos.Where(d => d.Course.Id == id).ToList();
             VideoCourseViewModel VCVM = new VideoCourseViewModel() { Videos = videos, Course = course };
@@ -44,6 +46,30 @@ namespace LearningPlattform.Controllers
             {
                 return HttpNotFound();
             }
+            var CurrentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            //var EnrolledUsers = db.Users.Where(u => u == CurrentUser).Where(cu => cu.Courses.FirstOrDefault() == cu.Courses.Where(du => du == course));
+            //  var EnrolledUser = db.Users.Where(u => u == CurrentUser).Where(cu => cu.Courses.FirstOrDefault(du => du == course) != null);
+            var EnrolledUsers = (from m in db.Courses
+                                 from b in m.Users
+                                 where b.Id == CurrentUser.Id
+                                 where m.Id == course.Id
+                                 select new { EnrollmentId = m.Id }).SingleOrDefault();
+
+            if(EnrolledUsers != null)
+            {
+                ViewBag.Enrolled = true;
+            }
+            else
+            {
+                ViewBag.Enrolled = false;
+            }
+
+            //if (course.Users.Any(u => u == EnrolledUser) == true)
+            //{
+            //    ViewBag.Enrolled = true;
+            //}
+            
             return View(VCVM);
         }
 

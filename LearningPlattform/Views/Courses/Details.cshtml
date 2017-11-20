@@ -99,6 +99,8 @@
     @Html.ActionLink("Back to List", "Index") |
     @Html.ActionLink("Delete", "Delete", new { id = Model.Course.Id }) |
     @Html.ActionLink("Add Video", "Create", "Videos", new {CourseId = Model.Course.Id}, null)
+    
+    <p>Enroll - @ViewBag.Enrolled</p>
     @*@Html.ActionLink("Add Video", "Create", "Videos", new { Model }, null)*@
 </p>
 
