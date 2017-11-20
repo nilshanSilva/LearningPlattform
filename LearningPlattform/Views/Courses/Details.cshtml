@@ -35,6 +35,13 @@
     .menu-link {
         height: 50px;
     }
+
+    .enroll {
+           text-align:right;
+           margin-right:100px;
+           
+       /* text-indent: -9999px; */ /* hides the link text */
+    }
 </style>
 
 
@@ -98,11 +105,25 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Course.Id }) |
     @Html.ActionLink("Back to List", "Index") |
     @Html.ActionLink("Delete", "Delete", new { id = Model.Course.Id }) |
-    @Html.ActionLink("Add Video", "Create", "Videos", new {CourseId = Model.Course.Id}, null)
-    
-    <p>Enroll - @ViewBag.Enrolled</p>
+    @Html.ActionLink("Add Video", "Create", "Videos", new { CourseId = Model.Course.Id }, null) |
+</p> 
+
     @*@Html.ActionLink("Add Video", "Create", "Videos", new { Model }, null)*@
-</p>
+@{
+    if (Model.Videos.Count == 0)
+    {
+    <p>There are no videos in this course yet.</p>
+}
+else
+    {
+        if (ViewBag.Enrolled == false)
+        {
+    <div class="enroll">
+        @Html.ActionLink("Enroll Now", "Enroll", new { Id = Model.Course.Id }, new { @class = "btn btn-primary btn-large"})
+    </div>
+            }
+        }
+    }
 
 @foreach (var item in Model.Videos)
 {
@@ -127,7 +148,11 @@
 
     </div>
 
-
+    if (!ViewBag.Enrolled)
+    {
+        <p>You must Enroll to view the Rest of the Course</p>
+        break;
+    }
 }
 </ul>
 

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using LearningPlattform.Models;
 namespace LearningPlattform.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-            return View();
+
+            return View(db.Courses.ToList());
         }
 
         public ActionResult About()

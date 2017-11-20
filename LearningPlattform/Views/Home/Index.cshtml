@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<LearningPlattform.Models.Course>
+@{
     ViewBag.Title = "Home Page";
 }
 <style>
@@ -43,88 +44,58 @@
     .label-video {
         background: #ff0000;
     }
+
+    .containe {
+        width: 100%;
+        border: 1px solid black;
+        display: table;
+        table-layout: fixed;
+    }
+
+    .child {
+        /*border: 1px solid grey;
+        display: table-cell;*/
+        float:right;
+    }
 </style>
 
 @Styles.Render("~/Content/css")
 
 
     <div align="left" height ="200" > <img src="~/Content/Images/New/99de1cad-c119-49e5-b695-fcbefb9a70ee-original.png" width="100%" /> </div>   
+   <p></p>
+<div class="containe">
+    <div class="child><p>Hello Word</p></div>
+    <div class="child">@*<img src="~/Content/Images/1437047155.jpg" width="40%" />*@
+    <img src="~/Content/Images/1437047155.jpg" width="40%"/>
+    </div>
+</div>
 
-    <div align ="right"><img src="~/Content/Images/1437047155.jpg" width="40%" /></div>
-
-
-
+@if(Model.Count() > 3)
+{
+    <p></p>
 <div class="container-fluid pb-video-container">
     <div class="col-md-12 offset-md-1">
-        <h2 style="text-align:center; font-family:Haettenschweiler" class="text-xs-center">Currently In Progress</h2>
+        <h2 style="text-align:center; font-family:Haettenschweiler" class="text-xs-center">Recent Arrivals</h2>
         <div class="row pb-row">
+            @foreach (var item in Model)
+            {
             <div class="col-md-3 pb-video">
-                <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">Claydee - Alena</label>
-            </div>
-            <div class="col-md-3 pb-video">
-                <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/wjT2JVlUFY4?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">Manuel Riva - Mhm Mhm</label>
-            </div>
-            <div class="col-md-3 pb-video">
-                <iframe class="pb-video-frame " width="100%" height="230" src="https://www.youtube.com/embed/papuvlVeZg8?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">Clean Bandit - Rockabye</label>
-            </div>
-            <div class="col-md-3 pb-video">
-                <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/Y1_VsyLAGuk?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">Burak Yeter - Tuesday</label>
-            </div>
+                <a href=@Url.Action("Details", "Courses", new { Id = item.Id })>
+                    <img src=@Url.Content(@item.ImagePath) width="100%" height="200" alt="Cinque Terre">
+                </a>
+                    <label class="form-control label-warning text-xs-center">@item.Name</label>
+</div>
+            }
+        </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <p>No videos to show</p>
+}
 
-
-<div class="row">
-    <div class="col-md-12">
-        <h2 style="text-align:center; font-family:Haettenschweiler">Recently Updated</h2>
-        <p style="text-align:center" class=" subheading">
-            Curious what's new at Learn IT? The following series have been recently updated.
-        </p>
-        <p style="text-align:center"><a class=" btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-</div>
-
-<div class="container-fluid pb-video-container">
-    <div class="col-md-12 offset-md-1">
-        <div class="row pb-row">
-            <div class="col-md-6 pb-video">
-                <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">Claydee - Alena</label>
-            </div>
-            <div class="col-md-6 pb-video">
-                <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/wjT2JVlUFY4?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">Manuel Riva - Mhm Mhm</label>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
