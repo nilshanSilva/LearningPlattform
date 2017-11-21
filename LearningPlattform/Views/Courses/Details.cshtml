@@ -42,13 +42,21 @@
            
        /* text-indent: -9999px; */ /* hides the link text */
     }
+    .message{
+        color:cadetblue;
+        font-size:large;
+        padding-top:20px;
+    }
+    .coursename {
+        color: cadetblue;
+        padding-top: 10px
+    }
 </style>
 
 
-<h2>@Model.Course.Name</h2>
+<h2 class="coursename">@Model.Course.Name</h2>
 
 <div>
-    @*<h4>Course</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -99,60 +107,86 @@
             @Html.DisplayFor(model => model.Course.Price)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.InstructorId)
+        </dt>
+
+        <dd>
+           <p> @ViewBag.Instructor.FirstName @ViewBag.Instructor.Surname</p>
+        </dd>
+
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Course.Id }) |
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Course.Id }) |
-    @Html.ActionLink("Add Video", "Create", "Videos", new { CourseId = Model.Course.Id }, null) |
-</p> 
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.Instructor == ViewBag.CurrentUser)
+        {
+    <p>
+        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Course.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Course.Id }) |
+        @Html.ActionLink("Add Video", "Create", "Videos", new { CourseId = Model.Course.Id }, null) |
+    </p>
+        }
+        else
+        {
+    <p>
+    @Html.ActionLink("Back to List", "Index")
+    </p>
+        }
+        </div>
 
-    @*@Html.ActionLink("Add Video", "Create", "Videos", new { Model }, null)*@
-@{
-    if (Model.Videos.Count == 0)
-    {
-    <p>There are no videos in this course yet.</p>
+                    <div class="col-md-4">
+                        @{
+                            if (Model.Videos.Count > 0)
+                            {
+                                if (ViewBag.Enrolled == false)
+                                {
+                                    <div class="enroll">
+                                        @Html.ActionLink("Enroll Now", "Enroll", new { Id = Model.Course.Id }, new { @class = "btn btn-primary btn-large" })
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+    </div>
+
+@if (Model.Videos.Count == 0)
+{
+<p>There are no videos on this course yet.</p>
 }
 else
+{
+    foreach (var item in Model.Videos)
     {
-        if (ViewBag.Enrolled == false)
+        <div class="row">
+            <div class="container-fluid pb-video-container">
+                <div class="col-md-4">
+                    <iframe class="pb-video-frame" width="100%" height="230" src="@item.Path" frameborder="0" allowfullscreen></iframe>
+                    <label class="form-control label-warning text-xs-center">@Model.Course.Name</label>
+                </div>
+                <div class="col-md-8">
+                    <h2>@item.Name</h2>
+                    <p>@item.Description</p>
+                </div>
+            </div> @*/pb-video-container*@
+        </div>
+
+        if (!ViewBag.Enrolled)
         {
-    <div class="enroll">
-        @Html.ActionLink("Enroll Now", "Enroll", new { Id = Model.Course.Id }, new { @class = "btn btn-primary btn-large"})
-    </div>
-            }
+            <p></p>
+            <div class="message">
+            <p>You must Enroll to view the Rest of the Course</p>
+            </div>
+            break;
         }
     }
-
-@foreach (var item in Model.Videos)
-{
-    <div class="row">
-        <div class="container-fluid pb-video-container">
-            <div class="col-md-4">
-                <iframe class="pb-video-frame" width="100%" height="230" src="@item.Path" frameborder="0" allowfullscreen></iframe>
-                <label class="form-control label-warning text-xs-center">@Model.Course.Name</label>
-            </div>
-            <div class="col-md-8">
-                <h2>@item.Name</h2>
-                <p>@item.Description</p>
-            </div>
-        </div> @*/pb-video-container*@
-    </div>
-
-    if (!ViewBag.Enrolled)
-    {
-        <p>You must Enroll to view the Rest of the Course</p>
-        break;
-    }
 }
-</ul>
-
-<script language="javascript" type="text/javascript" src="jquery-1.8.2.js"></script>
-<script language="javascript" type="text/javascript">
-$(function(){
-    $('.close').click(function(){
-        $('iframe').attr('src', $('iframe').attr('src'));
-    });
-});
-</script>
+    <script language="javascript" type="text/javascript" src="jquery-1.8.2.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $('.close').click(function () {
+                $('iframe').attr('src', $('iframe').attr('src'));
+            });
+        });
+    </script>

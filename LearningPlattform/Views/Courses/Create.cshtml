@@ -62,6 +62,10 @@
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*  Hidden Form Field for Passing the InstructorId  *@
+        @Html.Hidden("InstructorId", "tempString") @*A temporary string is passed to pass through the IsValid Method
+                                                      since this field is Marked as [Required] in the Course model.
+                                                       The actual Id of the current user will be added on the controller. *@
         <div class="form-group">
             <div class="col-md-10">
                 <label for="file">Upload Cover Image:</label><input type="file" name="file" id="file" />

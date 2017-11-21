@@ -59,6 +59,10 @@ namespace LearningPlattform.Controllers
             {
                 ViewBag.Enrolled = false;
             }
+
+            var Instructor = UserManager.FindById(course.InstructorId);
+            ViewBag.Instructor = Instructor;
+            ViewBag.CurrentUser = CurrentUser;
             
             return View(VCVM);
         }
@@ -73,7 +77,7 @@ namespace LearningPlattform.Controllers
         // POST: Courses/Create
         [HttpPost, Authorize(Roles = "Instructor")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price")] Course course, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price,InstructorId")] Course course, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +93,7 @@ namespace LearningPlattform.Controllers
                     file.SaveAs(path);
                     course.ImagePath = dbpath;
                 }
+                course.InstructorId = User.Identity.GetUserId().ToString();
                 db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");

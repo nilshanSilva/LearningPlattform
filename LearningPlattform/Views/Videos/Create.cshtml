@@ -30,11 +30,7 @@
                 @Html.ValidationMessageFor(model => model.Video.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        @* 
-        Hidden Form Field for Passing the CourseId    
-        *@
-       @* <input type="hidden" name="Id id="Id" value="@Model.Course.Id" /> *@
-             @* @Html.HiddenFor(model => model.Course.Id)*@
+        @*  Hidden Form Field for Passing the CourseId  *@
                @Html.Hidden("CourseId", Model.Course.Id)
 
         <div class="form-group">
@@ -42,16 +38,6 @@
                 <label for="file">Upload Video:</label><input type="file" name="file" id="file" />  
             </div>
         </div>
-
-
-                  @*<label for="file">Upload Image</label>
-                  <input type="file" name="file" id="file" accept="image/jpeg,image"/>?<br><br>
-                  <input type="submit" value="Upload Image"/>
-                  <br><br>
-              @ViewBag.Message*@
-
-                  
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

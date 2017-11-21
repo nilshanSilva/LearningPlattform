@@ -201,6 +201,14 @@
     <Compile Include="Migrations\201711201437048_compDb.Designer.cs">
       <DependentUpon>201711201437048_compDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711211826369_InstructorIdOnCourse.cs" />
+    <Compile Include="Migrations\201711211826369_InstructorIdOnCourse.Designer.cs">
+      <DependentUpon>201711211826369_InstructorIdOnCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711211902311_displayNameForInstructorId.cs" />
+    <Compile Include="Migrations\201711211902311_displayNameForInstructorId.Designer.cs">
+      <DependentUpon>201711211902311_displayNameForInstructorId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -305,6 +313,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711201437048_compDb.resx">
       <DependentUpon>201711201437048_compDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711211826369_InstructorIdOnCourse.resx">
+      <DependentUpon>201711211826369_InstructorIdOnCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711211902311_displayNameForInstructorId.resx">
+      <DependentUpon>201711211902311_displayNameForInstructorId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
