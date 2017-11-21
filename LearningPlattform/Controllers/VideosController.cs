@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -8,8 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using LearningPlattform.Models;
 using LearningPlattform.Models.ViewModels;
-using System.Data.Entity.Validation;
-using System;
 
 namespace LearningPlattform.Controllers
 {
@@ -48,9 +44,6 @@ namespace LearningPlattform.Controllers
         }
 
         // POST: Videos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        ///[HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateAntiForgeryToken]
         public ActionResult Create(int CourseId, [Bind(Include = "Id,Name,Description,Path")] Video video, HttpPostedFileBase file)
@@ -76,9 +69,6 @@ namespace LearningPlattform.Controllers
                 db.Videos.Add(video);
                 db.SaveChanges();
                  return RedirectToAction("Details", "Courses", new { Id = video.Course.Id });
-              //  return View("Details", "Course")
-               // return RedirectToAction("Index");
-               //developer.paypal.com
             }
 
             return RedirectToAction("Index");
@@ -100,8 +90,6 @@ namespace LearningPlattform.Controllers
         }
 
         // POST: Videos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,Path")] Video video)

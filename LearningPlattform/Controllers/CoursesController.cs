@@ -16,7 +16,7 @@ namespace LearningPlattform.Controllers
     [Authorize]
     public class CoursesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); // This is Test Comment
+        private ApplicationDbContext db = new ApplicationDbContext();
         protected UserManager<ApplicationUser> UserManager { get; set; }
 
         public CoursesController()
@@ -37,8 +37,6 @@ namespace LearningPlattform.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            // var course = from t in db.Courses.Include(d => d.Users) where t.Id == id select t;
-            //Course course = db.Courses.Include(d => d.Users).Where(c => c.Id == id).Single();
             Course course = db.Courses.Find(id);
             List<Video> videos = db.Videos.Where(d => d.Course.Id == id).ToList();
             VideoCourseViewModel VCVM = new VideoCourseViewModel() { Videos = videos, Course = course };
@@ -47,9 +45,6 @@ namespace LearningPlattform.Controllers
                 return HttpNotFound();
             }
             var CurrentUser = UserManager.FindById(User.Identity.GetUserId());
-
-            //var EnrolledUsers = db.Users.Where(u => u == CurrentUser).Where(cu => cu.Courses.FirstOrDefault() == cu.Courses.Where(du => du == course));
-            //  var EnrolledUser = db.Users.Where(u => u == CurrentUser).Where(cu => cu.Courses.FirstOrDefault(du => du == course) != null);
             var EnrolledUsers = (from m in db.Courses
                                  from b in m.Users
                                  where b.Id == CurrentUser.Id
@@ -64,11 +59,6 @@ namespace LearningPlattform.Controllers
             {
                 ViewBag.Enrolled = false;
             }
-
-            //if (course.Users.Any(u => u == EnrolledUser) == true)
-            //{
-            //    ViewBag.Enrolled = true;
-            //}
             
             return View(VCVM);
         }
@@ -81,8 +71,6 @@ namespace LearningPlattform.Controllers
         }
 
         // POST: Courses/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, Authorize(Roles = "Instructor")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Language,CourseLevel,Price")] Course course, HttpPostedFileBase file)
@@ -101,8 +89,6 @@ namespace LearningPlattform.Controllers
                     file.SaveAs(path);
                     course.ImagePath = dbpath;
                 }
-               // var user = UserManager.FindById(User.Identity.GetUserId());
-               // course.Instructor = user;
                 db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -128,8 +114,6 @@ namespace LearningPlattform.Controllers
         }
 
         // POST: Courses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize(Roles = "Instructor")]
         [ValidateAntiForgeryToken]

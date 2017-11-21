@@ -57,44 +57,65 @@
         display: table-cell;*/
         float:right;
     }
+    .tbrow{
+        height:200px;
+    }
 </style>
 
 @Styles.Render("~/Content/css")
 
 
-    <div align="left" height ="200" > <img src="~/Content/Images/New/99de1cad-c119-49e5-b695-fcbefb9a70ee-original.png" width="100%" /> </div>   
+    <div align="left" height ="200" > <img src="~/Content/Images/70ee-original.png" width="100%" /> </div>   
    <p></p>
-<div class="containe">
-    <div class="child><p>Hello Word</p></div>
-    <div class="child">@*<img src="~/Content/Images/1437047155.jpg" width="40%" />*@
-    <img src="~/Content/Images/1437047155.jpg" width="40%"/>
-    </div>
-</div>
 
-@if(Model.Count() > 3)
+
+@if (Model.Count() > 3)
 {
     <p></p>
 <div class="container-fluid pb-video-container">
     <div class="col-md-12 offset-md-1">
         <h2 style="text-align:center; font-family:Haettenschweiler" class="text-xs-center">Recent Arrivals</h2>
         <div class="row pb-row">
-            @foreach (var item in Model)
-            {
-            <div class="col-md-3 pb-video">
-                <a href=@Url.Action("Details", "Courses", new { Id = item.Id })>
-                    <img src=@Url.Content(@item.ImagePath) width="100%" height="200" alt="Cinque Terre">
-                </a>
-                    <label class="form-control label-warning text-xs-center">@item.Name</label>
-</div>
+            @{
+                var courses = Model.ToList();
+                int terminator = 4; //The count is already verfied to be > 3, so 4 could be directly assigned
+                if(Model.Count() > 7)
+                {
+                    terminator = 8;
+                }
             }
-        </div>
+                @for (int i = 0; i < terminator; i++)
+                {
+                    <div class="col-md-3 pb-video">
+                        <a href=@Url.Action("Details", "Courses", new { Id = courses[i].Id })>
+                            <img src=@Url.Content(courses[i].ImagePath) width="100%" height="200" alt="Cinque Terre">
+                        </a>
+                        <label class="form-control label-warning text-xs-center">@courses[i].Name</label>
+                    </div>
+                }
+                    
         </div>
     </div>
+  </div>
 }
-else
-{
-    <p>No videos to show</p>
-}
+
+
+<div class="row">
+       <div class="col-md-6">
+        <h2>Learning Platform</h2>
+        <p>Learning Platform is designed for individuals that are passionate on learning new things at their own
+           pace and style. It provides you with an opportunity for improving your knowledge and skills on the subject
+           areas which matter the most.
+          Enroll and enjoy the range of fun and interseting courses on the platform, 
+           be aware of new courses and videos, and help and contribute in the work of making education accessible 
+           for everyone.</p>
+       </div>
+    <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <img src="~/Content/Images/1437047155.jpg" width="100%" class="img-thumbnail" alt="Learning Platform Image">
+        </div>
+
+</div> 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
