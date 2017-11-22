@@ -51,6 +51,9 @@
         color: cadetblue;
         padding-top: 10px
     }
+    .instructormessage {
+        color: cadetblue;
+    }
 </style>
 
 
@@ -138,7 +141,7 @@
 
                     <div class="col-md-4">
                         @{
-                            if (Model.Videos.Count > 0)
+                            if (Model.Videos.Count > 0 && ViewBag.Instructor != ViewBag.CurrentUser)
                             {
                                 if (ViewBag.Enrolled == false)
                                 {
@@ -150,6 +153,11 @@
                         }
                     </div>
     </div>
+
+@if(ViewBag.Instructor == ViewBag.CurrentUser)
+{
+    <p class="instructormessage"> * Note: This course is created by you. You can use the above links to Edit, Delete, or Add new Videos to this course.</p>
+}
 
 @if (Model.Videos.Count == 0)
 {
@@ -163,7 +171,7 @@ else
             <div class="container-fluid pb-video-container">
                 <div class="col-md-4">
                     <iframe class="pb-video-frame" width="100%" height="230" src="@item.Path" frameborder="0" allowfullscreen></iframe>
-                    <label class="form-control label-warning text-xs-center">@Model.Course.Name</label>
+                    <label class="list-group-item list-group-item-action active" >@Model.Course.Name</label>
                 </div>
                 <div class="col-md-8">
                     <h2>@item.Name</h2>
@@ -172,13 +180,16 @@ else
             </div> @*/pb-video-container*@
         </div>
 
-        if (!ViewBag.Enrolled)
+        if (ViewBag.Instructor != ViewBag.CurrentUser)
         {
+            if (!ViewBag.Enrolled)
+            {
             <p></p>
             <div class="message">
             <p>You must Enroll to view the Rest of the Course</p>
             </div>
-            break;
+                break;
+            }
         }
     }
 }

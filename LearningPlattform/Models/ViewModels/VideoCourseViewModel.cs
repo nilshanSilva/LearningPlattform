@@ -16,4 +16,5 @@ namespace LearningPlattform.Models.ViewModels
         public List<Video> Videos { get; set; }
         public Course Course { get; set; }
     }
+
 }
