@@ -27,6 +27,7 @@ namespace LearningPlattform.Controllers
         // GET: Courses
         public ActionResult Index()
         {
+            ViewBag.CurrentUser = UserManager.FindById(User.Identity.GetUserId());
             return View(db.Courses.ToList());
         }
             
@@ -50,7 +51,6 @@ namespace LearningPlattform.Controllers
                                  where b.Id == CurrentUser.Id
                                  where m.Id == course.Id
                                  select new { EnrollmentId = m.Id }).SingleOrDefault();
-
             if(EnrolledUsers != null)
             {
                 ViewBag.Enrolled = true;
@@ -59,11 +59,9 @@ namespace LearningPlattform.Controllers
             {
                 ViewBag.Enrolled = false;
             }
-
             var Instructor = UserManager.FindById(course.InstructorId);
             ViewBag.Instructor = Instructor;
-            ViewBag.CurrentUser = CurrentUser;
-            
+            ViewBag.CurrentUser = CurrentUser;        
             return View(VCVM);
         }
 

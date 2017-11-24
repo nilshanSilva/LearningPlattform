@@ -13,7 +13,6 @@ namespace LearningPlattform.Models
     public enum Gender { Male = 1, Female}
     public enum AccountStatus { Active = 1, Inactive}
 
-
     public class Course
     {
         public int Id { get; set; }
@@ -38,6 +37,6 @@ namespace LearningPlattform.Models
         public ICollection<ApplicationUser> Users { get; set; }
         [ScaffoldColumn(false), Required, Display(Name ="Instructor")]
         public string InstructorId { get; set; }
-
     }
 }
+

@@ -90,7 +90,7 @@
                         <a href=@Url.Action("Details", "Courses", new { Id = courses[i].Id })>
                             <img src=@Url.Content(courses[i].ImagePath) width="100%" height="200" alt="Cinque Terre">
                         </a>
-                        <label class="form-control label-warning text-xs-center">@courses[i].Name</label>
+                        <label class="list-group-item list-group-item-action active">@courses[i].Name</label>
                     </div>
                 }
                     
