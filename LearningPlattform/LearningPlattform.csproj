@@ -205,17 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711201437048_compDb.cs" />
-    <Compile Include="Migrations\201711201437048_compDb.Designer.cs">
-      <DependentUpon>201711201437048_compDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711211826369_InstructorIdOnCourse.cs" />
-    <Compile Include="Migrations\201711211826369_InstructorIdOnCourse.Designer.cs">
-      <DependentUpon>201711211826369_InstructorIdOnCourse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711211902311_displayNameForInstructorId.cs" />
-    <Compile Include="Migrations\201711211902311_displayNameForInstructorId.Designer.cs">
-      <DependentUpon>201711211902311_displayNameForInstructorId.cs</DependentUpon>
+    <Compile Include="Migrations\201711280405437_azure.cs" />
+    <Compile Include="Migrations\201711280405437_azure.Designer.cs">
+      <DependentUpon>201711280405437_azure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201712180758078_forum.cs" />
     <Compile Include="Migrations\201712180758078_forum.Designer.cs">
@@ -358,14 +350,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711201437048_compDb.resx">
-      <DependentUpon>201711201437048_compDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711211826369_InstructorIdOnCourse.resx">
-      <DependentUpon>201711211826369_InstructorIdOnCourse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711211902311_displayNameForInstructorId.resx">
-      <DependentUpon>201711211902311_displayNameForInstructorId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711280405437_azure.resx">
+      <DependentUpon>201711280405437_azure.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712180758078_forum.resx">
       <DependentUpon>201712180758078_forum.cs</DependentUpon>
