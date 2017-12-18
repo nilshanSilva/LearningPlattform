@@ -149,12 +149,21 @@
             {
                 if (ViewBag.Enrolled == false)
                 {
+                    if (Model.Course.Price > 0)
+                    {
+                        <div class="enroll">
+                            @Html.ActionLink("Enroll Now", "Create", "Paypal", new { courseId = Model.Course.Id }, new { @class = "btn btn-primary btn-large" })
+                        </div>
+                    }
+                    else
+                    {
                     <div class="enroll">
                         @Html.ActionLink("Enroll Now", "Enroll", new { Id = Model.Course.Id }, new { @class = "btn btn-primary btn-large" })
                     </div>
-                }             
+                        }
+                    }
+                }
             }
-        }
     </div>                      
 
                      

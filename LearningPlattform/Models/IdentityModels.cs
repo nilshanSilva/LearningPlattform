@@ -50,6 +50,10 @@ namespace LearningPlattform.Models
         public DbSet<Video> Videos { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<CourseComment> CourseComments { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<AnswerComment> AnswerComments { get; set; }
+        public DbSet<Like> Likes { get; set; }
 
 
         public static ApplicationDbContext Create()

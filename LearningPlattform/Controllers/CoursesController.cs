@@ -177,10 +177,10 @@ namespace LearningPlattform.Controllers
             var CurrentUser = UserManager.FindById(User.Identity.GetUserId());
             var user = db.Users.Find(User.Identity.GetUserId());
             var course = db.Courses.Include(c => c.Users).FirstOrDefault(d => d.Id == Id);
-            course.Users.Add(user);
-            db.SaveChanges();
-
+                course.Users.Add(user);
+                db.SaveChanges();
             return RedirectToAction("Details", "Courses", new { Id = course.Id });
+            
         }
 
         protected override void Dispose(bool disposing)

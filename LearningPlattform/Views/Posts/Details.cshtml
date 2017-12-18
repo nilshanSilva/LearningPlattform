@@ -1,0 +1,207 @@
+﻿@model LearningPlattform.Models.ViewModels.PostViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            <h2>@Model.Post.Question</h2>
+            <p style="display:inline-block">Posted by: @ViewBag.Raiser.FirstName @ViewBag.Raiser.Surname </p>
+            <p style="display:inline-block"> (@Model.Post.PostedDate.ToShortDateString())</p>
+        </th>
+    </tr>
+</table>
+    <div class="col-md-12">
+        <div class="col-md-10">
+            <p class=" post-body">@Model.Post.Description</p>
+        </div>
+    </div>
+@{ 
+    int i = 0;
+    if(Model.CorrectAnswer != null)
+    {
+        i = 1;
+    }
+    i += Model.Answers.Count();
+}
+    @if (i == 0)
+    {
+        <h4>Be the First to Answer</h4>
+    }
+    else if (i == 1)
+    {
+        <h4>1 Answer</h4>
+    }
+    else
+    {
+        <h4>@i Answers</h4>
+    }
+
+
+    <hr />
+    @if (Model.CorrectAnswer != null)
+    {
+        <div class="answer">
+            <div class=" answer-body">
+                <div style="display:inline-block">
+                    <p class="correct-answer">Accepted Answer</p>
+                </div>
+                <div style="display:inline-block">
+                    <p>by: @Model.CorrectAnswer.Answerer.FirstName @Model.CorrectAnswer.Answerer.Surname</p>
+                </div>
+                <p>@Model.CorrectAnswer.Body</p>
+             
+                    @if (Model.CorrectAnswer.Likes.ToList().Where(f => f.Liker.Id == ViewBag.CurrentUser.Id).FirstOrDefault() == null)
+                    {
+                    <p>@Model.CorrectAnswer.Likes.Count() Likes | @Html.ActionLink("Like", "ProcessLike", "Posts", new { answerId = Model.CorrectAnswer.Id, postId = Model.Post.Id, likeType = "like" }, null)</p>
+                    }
+                    else
+                    {
+                    <p>@Model.CorrectAnswer.Likes.Count() Likes | @Html.ActionLink("Unlike", "ProcessLike", "Posts", new { answerId = Model.CorrectAnswer.Id, postId = Model.Post.Id, likeType = "unlike" }, null)</p>
+                    }
+
+            </div>
+            <div class="comments-body">
+                <div class="comments-container">
+                @foreach (LearningPlattform.Models.AnswerComment comment in Model.CorrectAnswer.Comments)
+                {
+                    <p style="display:inline-block" class="comment">@comment.CommenterName: </p>
+                    <p style="display:inline-block">@comment.Body</p><p></p>
+                }
+                    </div>
+                @using (Html.BeginForm("PostComment", "Posts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div style="display:inline-block">
+                        @Html.EditorFor(model => model.Comment.Body, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Comment.Body, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.Hidden("answerId", Model.CorrectAnswer.Id)
+                    @Html.Hidden("postId", Model.Post.Id)
+
+                    <div style="display:inline-block">
+                        <input type="submit" value="Add Comment" class="btn btn-default" />
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+
+    @foreach (LearningPlattform.Models.Answer Answer in Model.Answers)
+    {
+        <div class="answer">
+            <div class=" answer-body">
+      
+     <div style="display:inline-block">
+         <p>by: @Answer.Answerer.FirstName @Answer.Answerer.Surname | </p>
+     </div>
+        @if (ViewBag.CurrentUser.Id == ViewBag.Raiser.Id)
+        {
+            <div style="display:inline-block">
+                <p>@Html.ActionLink("Mark as Answer", "MarkAsAnswer", "Posts", new { answerId = Answer.Id, postId = Model.Post.Id }, null)</p>
+            </div>
+        }
+                <p>@Answer.Body</p>
+                @if (Answer.Likes.ToList().Where(f => f.Liker.Id == ViewBag.CurrentUser.Id).FirstOrDefault() == null)
+                {
+                    <p>@Answer.Likes.Count() Likes | @Html.ActionLink("Like", "ProcessLike", "Posts", new { answerId = Answer.Id, postId = Model.Post.Id, likeType = "like" }, null)</p>
+                }
+                else
+                {
+                    <p>@Answer.Likes.Count() Likes | @Html.ActionLink("Unlike", "ProcessLike", "Posts", new { answerId = Answer.Id, postId = Model.Post.Id, likeType = "unlike" }, null)</p>
+                }
+            </div>
+
+            <div class="comments-body">
+                <div class="comments-container">
+                @foreach (LearningPlattform.Models.AnswerComment Comment in Answer.Comments)
+                {
+                    <p style="display:inline-block" class="comment">@Comment.CommenterName: </p>
+                    <p style="display:inline-block">@Comment.Body</p><p></p>
+                }
+                </div>
+           @using (Html.BeginForm("PostComment", "Posts", FormMethod.Post, new { @class = "form-horizontal" , role = "form" }))
+            {
+               @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div style="display:inline-block">
+                    @Html.EditorFor(model => model.Comment.Body, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comment.Body, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.Hidden("answerId", Answer.Id)
+               @Html.Hidden("postId", Model.Post.Id)
+
+            <div style="display:inline-block">  
+                    <input type="submit" value="Add Comment" class="btn btn-default" />
+            </div>
+           }
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("PostAnswer", "Posts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>Add Answer</h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div style="display:inline-block">
+                    @Html.EditorFor(model => model.Answer.Body, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Answer.Body, "", new { @class = "text-danger" })
+                </div>
+
+            @Html.Hidden("postId", Model.Post.Id)
+
+
+            <div style="display:inline-block">
+                    <input type="submit" value="Submit Answer" class="btn btn-default" />
+            </div>
+
+        </div>
+    }
+
+    <style>
+        .post-body {
+            padding-bottom: 30px;
+        }
+
+        .answer {
+            padding-bottom: 40px;
+        }
+
+        .answer-body {
+            padding-top: 5px;
+            width: 80%;
+        }
+
+        .comments-body {
+            background: #f2faff;
+            width: 80%;
+        }
+
+        .comments-container {
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+
+        .comment{
+            color:darkblue;
+            font-style:oblique;
+        }
+
+        .correct-answer {
+            color: green;
+        }
+
+        .add-answer {
+            text-align: right;
+            margin-right: 100px;
+        }
+    </style>

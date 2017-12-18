@@ -37,6 +37,6 @@ namespace LearningPlattform.Models
         [ScaffoldColumn(false)]
         public Course Course { get; set; }
         [ScaffoldColumn(false)]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser Commenter { get; set; }
     }
 }

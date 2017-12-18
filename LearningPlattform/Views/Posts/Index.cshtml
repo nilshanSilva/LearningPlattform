@@ -1,0 +1,36 @@
+﻿@model IEnumerable<LearningPlattform.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Posts</h2>
+
+<p>
+    @Html.ActionLink("New Post", "Create")
+</p>
+
+@foreach (var item in Model)
+{
+    <div class="post-container">
+        <div class=" col-md-12">
+            <h2>@Html.ActionLink(item.Question, "Details", new { Id = item.Id }, null)</h2>
+        </div>
+        <div class=" col-md-8">
+            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+            </div>
+        </div>
+}
+
+<style>
+    .post-container {
+        background: #fefeff;
+        font-family: Lato;
+        padding-bottom: 150px;
+    }
+
+    .question{
+        font-size:medium;
+        font-style:oblique;
+    }
+</style>
